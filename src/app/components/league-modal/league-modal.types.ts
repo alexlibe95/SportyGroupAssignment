@@ -1,4 +1,4 @@
-import { League } from "../models/league.model";
+import { League } from "../../models/league.model";
 
 // LeagueModal component interfaces
 export interface ModalState {

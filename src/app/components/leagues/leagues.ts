@@ -1,11 +1,11 @@
 import { Component, inject, signal, computed, effect, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SportsService } from '../services/sports.service';
-import { League } from '../models/league.model';
+import { SportsService } from '../../services/sports.service';
+import { League } from '../../models/league.model';
 import { SearchBar } from '../search-bar/search-bar';
 import { SportFilter } from '../sport-filter/sport-filter';
 import { LeagueModal } from '../league-modal/league-modal';
-import { SEARCH_PLACEHOLDER } from '../config/constants';
+import { SEARCH_PLACEHOLDER } from '../../config/constants';
 
 @Component({
   selector: 'app-leagues',

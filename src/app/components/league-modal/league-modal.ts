@@ -1,6 +1,6 @@
 import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { League } from '../models/league.model';
+import { League } from '../../models/league.model';
 
 @Component({
   selector: 'app-league-modal',

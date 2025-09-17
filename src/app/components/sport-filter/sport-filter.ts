@@ -1,8 +1,8 @@
 import { Component, input, output, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { League } from '../models/league.model';
-import { SPORTS_FILTER } from '../config/constants';
+import { League } from '../../models/league.model';
+import { SPORTS_FILTER } from '../../config/constants';
 
 @Component({
   selector: 'app-sport-filter',
