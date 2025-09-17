@@ -2,11 +2,20 @@
   <h1 class="text-3xl font-bold text-gray-900 text-center mb-8">Leagues</h1>
 
   <!-- Search Controls -->
-  <div class="mb-8">
-    <app-search-bar
-      placeholder="Search leagues starting with..."
-      (searchChange)="onSearchChange($event)">
-    </app-search-bar>
+  <div class="mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="md:col-span-1 lg:col-span-2">
+      <app-search-bar
+        [placeholder]="searchPlaceholder"
+        (searchChange)="onSearchChange($event)">
+      </app-search-bar>
+    </div>
+
+    <div class="md:col-span-1 lg:col-span-1">
+      <app-sport-filter
+        [leagues]="leagues()"
+        (sportChange)="onSportChange($event)">
+      </app-sport-filter>
+    </div>
   </div>
 
   <!-- Loading State -->
