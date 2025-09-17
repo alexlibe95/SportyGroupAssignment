@@ -1,0 +1,58 @@
+<div class="leagues-container">
+  <h1>Leagues</h1>
+
+  <!-- Future: Add filtering/search controls here -->
+  <div class="controls">
+    <!-- Placeholder for future filter dropdowns and search -->
+  </div>
+
+  <!-- Loading State -->
+  @if (isLoading()) {
+    <div class="loading">
+      <p>Loading leagues...</p>
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (error()) {
+    <div class="error">
+      <p>{{ error() }}</p>
+      <button (click)="loadLeagues()">Retry</button>
+    </div>
+  }
+
+  <!-- Empty State -->
+  @if (isEmpty()) {
+    <div class="no-leagues">
+      <p>No leagues found.</p>
+    </div>
+  }
+
+  <!-- Leagues List -->
+  @if (!isLoading() && !error() && hasLeagues()) {
+    <div class="leagues-list">
+      @for (league of leagues(); track league.idLeague) {
+        <div class="league-card"
+             [attr.data-league-id]="league.idLeague">
+
+          <div class="league-info">
+            <h3 class="league-name">{{ league.strLeague }}</h3>
+            <p class="league-sport">
+              <strong>Sport:</strong> {{ league.strSport }}
+            </p>
+            @if (league.strLeagueAlternate) {
+              <p class="league-alternate">
+                <strong>Alternate Name:</strong> {{ league.strLeagueAlternate }}
+              </p>
+            }
+          </div>
+
+          <!-- Future: Add badge image, actions, etc. -->
+          <div class="league-actions">
+            <!-- Placeholder for future actions like view details, get badge, etc. -->
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>
