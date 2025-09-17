@@ -9,40 +9,20 @@ import { ApiConfig } from '../config/api.config';
   providedIn: 'root'
 })
 export class SportsService {
-
-  // In-memory cache for leagues data
-  private cachedLeagues: League[] | null = null;
-
   // In-memory cache for league badge images (leagueId -> badgeUrl)
   private cachedBadgeImages = new Map<string, string>();
 
   private http = inject(HttpClient);
 
   /**
-   * Fetches all leagues from the API with in-memory caching.
-   *
-   * Caching logic:
-   * - If data is already cached in memory, returns it immediately as an Observable
-   * - If not cached, fetches from API, stores in cache, then returns the data
-   * - This prevents unnecessary API calls and improves performance for subsequent requests
+   * Fetches all leagues from the API.
    *
    * @returns Observable<League[]> - Stream of leagues data
    */
   getLeagues(): Observable<League[]> {
-    // If we have cached data, return it immediately as an Observable
-    if (this.cachedLeagues) {
-      return of(this.cachedLeagues);
-    }
-
-    // If not cached, fetch from API and cache the result
     return this.http.get<LeaguesResponse>(ApiConfig.ALL_LEAGUES_ENDPOINT).pipe(
       // Extract the leagues array from the response
       map(response => response.leagues || []),
-
-      // Cache the fetched data for future requests
-      tap(leagues => {
-        this.cachedLeagues = leagues;
-      }),
 
       catchError(error => {
         console.error('Error fetching leagues:', error);
