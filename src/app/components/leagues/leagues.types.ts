@@ -1,7 +1,9 @@
+import { League } from "../../models/league.model";
+
 // Leagues component interfaces
 export interface LeaguesState {
-  leagues: any[];
-  filteredLeagues: any[];
+  leagues: League[];
+  filteredLeagues: League[];
   isLoading: boolean;
   error: string | null;
   searchTerm: string;
@@ -14,12 +16,12 @@ export interface BadgeData {
 }
 
 export interface LeaguesViewModel {
-  leagues: any[];
+  leagues: League[];
   isLoading: boolean;
   error: string | null;
   searchTerm: string;
   selectedSport: string;
-  filteredLeagues: any[];
+  filteredLeagues: League[];
   selectedBadge: BadgeData | null;
   badgeLoading: boolean;
 }
