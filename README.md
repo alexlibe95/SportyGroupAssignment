@@ -162,17 +162,6 @@ npm run lint
 - **Responsive Design** - Mobile-first approach ensures broad compatibility
 - **Error Recovery** - Graceful error handling builds user trust
 
-## 🤝 Contributing
-
-This project demonstrates modern Angular development practices and AI-assisted development workflows. The codebase serves as a reference implementation for:
-
-- Angular Signals and reactive programming
-- OnPush change detection strategies
-- Comprehensive TypeScript usage
-- TailwindCSS integration
-- Accessibility-first development
-- Component-based architecture
-
 ---
 
 **Built with ❤️ using Angular, TypeScript, and AI assistance**
