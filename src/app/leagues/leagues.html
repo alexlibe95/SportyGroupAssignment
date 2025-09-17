@@ -52,8 +52,13 @@
   @if (!isLoading() && !error() && hasLeagues()) {
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       @for (league of filteredLeagues(); track league.idLeague) {
-        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 border border-gray-200 overflow-hidden"
-             [attr.data-league-id]="league.idLeague">
+        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 border border-gray-200 overflow-hidden cursor-pointer"
+             [attr.data-league-id]="league.idLeague"
+             (click)="onLeagueClick(league)"
+             (keydown)="onLeagueKeyDown($event, league)"
+             tabindex="0"
+             role="button"
+             [attr.aria-label]="'View details for ' + league.strLeague">
 
           <div class="p-6">
             <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ league.strLeague }}</h3>
@@ -66,13 +71,18 @@
               </p>
             }
           </div>
-
-          <!-- Future: Add badge image, actions, etc. -->
-          <div class="px-6 pb-4">
-            <!-- Placeholder for future actions like view details, get badge, etc. -->
-          </div>
         </div>
       }
     </div>
+
+    <!-- League Modal -->
+    @if (modalOpen()) {
+      <app-league-modal
+        [league]="selectedLeague()"
+        [badgeImageUrl]="selectedBadge()?.imageUrl"
+        [badgeLoading]="badgeLoading()"
+        (closeModal)="closeModal()">
+      </app-league-modal>
+    }
   }
 </div>
