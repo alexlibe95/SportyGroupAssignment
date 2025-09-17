@@ -2,7 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { League, LeaguesResponse, SeasonsResponse } from '../models/league.model';
+import { League } from '../models/league.model';
+import { LeaguesResponse, SeasonsResponse } from '../models/api.models';
 import { ApiConfig } from '../config/api.config';
 
 @Injectable({

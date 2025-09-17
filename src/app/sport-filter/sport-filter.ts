@@ -1,14 +1,8 @@
 import { Component, input, output, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { League } from '../models/league.model';
 import { SPORTS_FILTER } from '../config/constants';
-
-export interface League {
-  idLeague: string;
-  strLeague: string;
-  strSport: string;
-  strLeagueAlternate: string;
-}
 
 @Component({
   selector: 'app-sport-filter',
