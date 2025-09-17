@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, effect } from '@angular/core';
+import { Component, inject, signal, computed, effect, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SportsService } from '../services/sports.service';
 import { League } from '../models/league.model';
@@ -11,7 +11,8 @@ import { SEARCH_PLACEHOLDER } from '../config/constants';
   selector: 'app-leagues',
   imports: [CommonModule, SearchBar, SportFilter, LeagueModal],
   templateUrl: './leagues.html',
-  styleUrl: './leagues.scss'
+  styleUrl: './leagues.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Leagues {
   private sportsService = inject(SportsService);

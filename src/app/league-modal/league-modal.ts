@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { League } from '../models/league.model';
 
@@ -7,6 +7,7 @@ import { League } from '../models/league.model';
   imports: [CommonModule],
   templateUrl: './league-modal.html',
   styleUrl: './league-modal.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '(document:keydown.escape)': 'close()'
   }

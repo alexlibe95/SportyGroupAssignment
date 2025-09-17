@@ -1,4 +1,4 @@
-import { Component, input, output, signal, computed } from '@angular/core';
+import { Component, input, output, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SPORTS_FILTER } from '../config/constants';
@@ -14,7 +14,8 @@ export interface League {
   selector: 'app-sport-filter',
   imports: [CommonModule, FormsModule],
   templateUrl: './sport-filter.html',
-  styleUrl: './sport-filter.scss'
+  styleUrl: './sport-filter.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SportFilter {
   // Input signals
