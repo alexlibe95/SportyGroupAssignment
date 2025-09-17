@@ -1,54 +1,65 @@
-<div class="leagues-container">
-  <h1>Leagues</h1>
+<div class="max-w-6xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-gray-900 text-center mb-8">Leagues</h1>
 
-  <!-- Future: Add filtering/search controls here -->
-  <div class="controls">
-    <!-- Placeholder for future filter dropdowns and search -->
+  <!-- Search Controls -->
+  <div class="mb-8">
+    <app-search-bar
+      placeholder="Search leagues starting with..."
+      (searchChange)="onSearchChange($event)">
+    </app-search-bar>
   </div>
 
   <!-- Loading State -->
   @if (isLoading()) {
-    <div class="loading">
-      <p>Loading leagues...</p>
+    <div class="text-center py-12">
+      <p class="text-gray-600 text-lg">Loading leagues...</p>
     </div>
   }
 
   <!-- Error State -->
   @if (error()) {
-    <div class="error">
-      <p>{{ error() }}</p>
-      <button (click)="loadLeagues()">Retry</button>
+    <div class="text-center py-12">
+      <p class="text-red-600 mb-4">{{ error() }}</p>
+      <button
+        (click)="loadLeagues()"
+        class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors duration-200">
+        Retry
+      </button>
     </div>
   }
 
   <!-- Empty State -->
   @if (isEmpty()) {
-    <div class="no-leagues">
-      <p>No leagues found.</p>
+    <div class="text-center py-12">
+      @if (searchTerm()) {
+        <p class="text-gray-600 text-lg">No leagues found matching "{{ searchTerm() }}".</p>
+      } @else {
+        <p class="text-gray-600 text-lg">No leagues found.</p>
+      }
     </div>
   }
 
   <!-- Leagues List -->
   @if (!isLoading() && !error() && hasLeagues()) {
-    <div class="leagues-list">
-      @for (league of leagues(); track league.idLeague) {
-        <div class="league-card"
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (league of filteredLeagues(); track league.idLeague) {
+        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 border border-gray-200 overflow-hidden"
              [attr.data-league-id]="league.idLeague">
 
-          <div class="league-info">
-            <h3 class="league-name">{{ league.strLeague }}</h3>
-            <p class="league-sport">
-              <strong>Sport:</strong> {{ league.strSport }}
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ league.strLeague }}</h3>
+            <p class="text-gray-600 mb-2">
+              <span class="font-medium">Sport:</span> {{ league.strSport }}
             </p>
             @if (league.strLeagueAlternate) {
-              <p class="league-alternate">
-                <strong>Alternate Name:</strong> {{ league.strLeagueAlternate }}
+              <p class="text-gray-500 italic text-sm">
+                <span class="font-medium">Alternate:</span> {{ league.strLeagueAlternate }}
               </p>
             }
           </div>
 
           <!-- Future: Add badge image, actions, etc. -->
-          <div class="league-actions">
+          <div class="px-6 pb-4">
             <!-- Placeholder for future actions like view details, get badge, etc. -->
           </div>
         </div>

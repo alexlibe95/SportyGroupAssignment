@@ -2,10 +2,11 @@ import { Component, inject, signal, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SportsService } from '../services/sports.service';
 import { League } from '../models/league.model';
+import { SearchBar } from '../search-bar/search-bar';
 
 @Component({
   selector: 'app-leagues',
-  imports: [CommonModule],
+  imports: [CommonModule, SearchBar],
   templateUrl: './leagues.html',
   styleUrl: './leagues.scss'
 })
@@ -16,9 +17,23 @@ export class Leagues {
   leagues = signal<League[]>([]);
   isLoading = signal(false);
   error = signal<string | null>(null);
+  searchTerm = signal('');
 
   // Computed signals for derived state
-  hasLeagues = computed(() => this.leagues().length > 0);
+  filteredLeagues = computed(() => {
+    const term = this.searchTerm().toLowerCase().trim();
+    const allLeagues = this.leagues();
+
+    if (!term) {
+      return allLeagues;
+    }
+
+    return allLeagues.filter(league =>
+      league.strLeague.toLowerCase().startsWith(term)
+    );
+  });
+
+  hasLeagues = computed(() => this.filteredLeagues().length > 0);
   isEmpty = computed(() => !this.isLoading() && !this.error() && !this.hasLeagues());
 
   constructor() {
@@ -43,5 +58,9 @@ export class Leagues {
         console.error('Error loading leagues:', err);
       }
     });
+  }
+
+  onSearchChange(searchTerm: string): void {
+    this.searchTerm.set(searchTerm);
   }
 }
